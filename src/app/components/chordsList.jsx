@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 const ChordsList = (prop) => {
   const [query, setQuery] = useState('');
-  const [filter, setFiltered] = useState([]);
+  const [filtered, setFiltered] = useState([]);
   const [chords, setChords] = useState(prop.chords);
 
   const handleSubmit = (e) => {
@@ -20,9 +20,29 @@ const ChordsList = (prop) => {
   };
 
   const toggle = ({ target }) => {
-    if (target.classList.contains('bg-red-300'))
-      target.classList.remove('bg-red-300');
-    else target.classList.add('bg-red-300');
+    const element = target.firstElementChild ? target : target.parentElement;
+    const name = element.firstElementChild.textContent;
+
+    if (element.classList.contains('bg-red-300')) {
+      element.classList.remove('bg-red-300');
+      const result = filtered.filter(
+        (chord) =>
+          !chord.name
+            .toLowerCase()
+            .replace(/\s/g, '')
+            .includes(name.toLowerCase().replace(/\s/g, ''))
+      );
+      setFiltered(result);
+    } else {
+      const result = prop.chords.filter((chord) =>
+        chord.name
+          .toLowerCase()
+          .replace(/\s/g, '')
+          .includes(name.toLowerCase().replace(/\s/g, ''))
+      );
+      element.classList.add('bg-red-300');
+      setFiltered([...filtered, ...result]);
+    }
   };
 
   return (
@@ -42,7 +62,12 @@ const ChordsList = (prop) => {
             </button>
           </div>
         </form>
-        <button className="bg-blue-600 px-2 rounded flex items-center">
+        <button
+          className="bg-blue-600 px-2 rounded flex items-center"
+          onClick={() => {
+            if (filtered.length) setChords(filtered);
+          }}
+        >
           <FaFilter size={30} /> <p className="m-2 text-lg">Filter</p>
         </button>
       </div>
