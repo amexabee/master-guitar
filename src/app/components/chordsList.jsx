@@ -69,7 +69,7 @@ const ChordsList = (prop) => {
         </form>
         <button
           className="bg-blue-600 px-2 rounded flex items-center"
-          onClick={() => handleClick}
+          onClick={handleClick}
         >
           <FaFilter size={30} /> <p className="m-2 text-lg">Filter</p>
         </button>
