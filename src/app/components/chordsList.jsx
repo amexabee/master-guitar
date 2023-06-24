@@ -19,6 +19,11 @@ const ChordsList = (prop) => {
     setChords(result);
   };
 
+  const handleClick = () => {
+    if (filtered.length) setChords(filtered);
+    setFiltered([]);
+  };
+
   const toggle = ({ target }) => {
     const element = target.firstElementChild ? target : target.parentElement;
     const name = element.firstElementChild.textContent;
@@ -64,9 +69,7 @@ const ChordsList = (prop) => {
         </form>
         <button
           className="bg-blue-600 px-2 rounded flex items-center"
-          onClick={() => {
-            if (filtered.length) setChords(filtered);
-          }}
+          onClick={() => handleClick}
         >
           <FaFilter size={30} /> <p className="m-2 text-lg">Filter</p>
         </button>
