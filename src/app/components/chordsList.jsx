@@ -21,6 +21,7 @@ const ChordsList = (prop) => {
 
   const handleClick = () => {
     if (filtered.length) setChords(filtered);
+    else setChords(prop.chords);
     setFiltered([]);
   };
 
@@ -63,7 +64,8 @@ const ChordsList = (prop) => {
               onChange={(e) => setQuery(e.target.value)}
             />
             <button className="bg-red-600 px-2 rounded flex items-center">
-              <FaSearch size={30} /> <p className="m-2 text-lg">Search</p>
+              <FaSearch size={30} color={'#ccc'} />
+              <p className="m-2 text-lg text-white">Search</p>
             </button>
           </div>
         </form>
@@ -71,7 +73,8 @@ const ChordsList = (prop) => {
           className="bg-blue-600 px-2 rounded flex items-center"
           onClick={handleClick}
         >
-          <FaFilter size={30} /> <p className="m-2 text-lg">Filter</p>
+          <FaFilter size={30} color={'#ccc'} />
+          <p className="m-2 text-lg text-white">Filter</p>
         </button>
       </div>
       <div className="p-5 grid grid-cols-3 gap-8 bg-slate-300">
