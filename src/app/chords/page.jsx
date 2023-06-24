@@ -10,7 +10,7 @@ const ChordsPage = async () => {
   const chords = await fetchChords();
   console.log(chords);
   return (
-    <div className="py-5">
+    <div className="pt-5 pb-0 bg-white">
       <h1 className="text-center text-2xl mb-3">
         Search or select and filter the chords you want to play with
       </h1>
