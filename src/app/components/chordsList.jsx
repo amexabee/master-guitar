@@ -40,13 +40,13 @@ const ChordsList = (prop) => {
       );
       setFiltered(result);
     } else {
-      const result = prop.chords.filter((chord) =>
+      element.classList.add('bg-red-300');
+      const result = chords.filter((chord) =>
         chord.name
           .toLowerCase()
           .replace(/\s/g, '')
           .includes(name.toLowerCase().replace(/\s/g, ''))
       );
-      element.classList.add('bg-red-300');
       setFiltered([...filtered, ...result]);
     }
   };
@@ -80,11 +80,12 @@ const ChordsList = (prop) => {
       <div className="p-5 grid grid-cols-3 gap-8 bg-slate-300">
         {chords.map((chord) => (
           <div
+            key={chord.name}
             className="bg-slate-200 p-5 flex flex-col justify-center items-center"
             onClick={toggle}
           >
             <p className="mb-2">{chord.name}</p>
-            <img src={chord.url} alt="C Major" />
+            <img src={chord.url} alt={chord.name} />
           </div>
         ))}
       </div>
